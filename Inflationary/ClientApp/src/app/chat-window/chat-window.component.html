@@ -1,0 +1,5 @@
+<div class="container">
+    <div *ngFor="let message of messages" class="chat-message">
+        <span class=""><span class="name">{{message.name}}:</span> <span class="sentence">{{ message.inflated }}</span></span> <span class="score float-end">Score: {{ message.score }}</span> 
+    </div>
+</div>

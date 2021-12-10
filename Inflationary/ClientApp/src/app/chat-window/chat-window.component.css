@@ -1,0 +1,9 @@
+.chat-message{
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+}
+
+.name {
+    padding-right: 5px;
+    font-weight: bold;
+}
