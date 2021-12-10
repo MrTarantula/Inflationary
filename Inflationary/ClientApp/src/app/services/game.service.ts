@@ -43,6 +43,14 @@ export class GameService {
     this.connection.invoke('inflate', this.player?.name, sentence)
       .catch(err => console.error(err));
   }
+
+  public async check(sentence: string): Promise<string> {
+    try {
+      return this.connection.invoke('check', sentence);
+    } catch (err) {
+      return "A connection error has occurred";
+    }
+  }
 }
 
 

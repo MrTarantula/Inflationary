@@ -1,5 +1,15 @@
 <div class="container">
-    <div *ngFor="let message of messages" class="chat-message">
-        <span class=""><span class="name">{{message.name}}:</span> <span class="sentence">{{ message.inflated }}</span></span> <span class="score float-end">Score: {{ message.score }}</span> 
+    <div *ngFor="let message of messages" class="row chat-message">
+        <div class="col-md-2">
+            <span class="name">{{message.name}}:</span>
+        </div>
+        <div class="col">
+            <span *ngIf="!message.cheat" class="sentence">{{ message.inflated }}</span>
+            <span *ngIf="message.cheat" class="cheat">{{ message.original }}</span>
+        </div>
+        <div class="col-md-3">
+            <span class="text-end">Score: {{ message.score }}</span>
+            <button class="btn btn-danger btn-sm float-end" (click)="cheat(message.id)" type="button">Cheat</button>
+        </div>
     </div>
 </div>

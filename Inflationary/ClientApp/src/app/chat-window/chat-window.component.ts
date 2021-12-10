@@ -19,6 +19,11 @@ export class ChatWindowComponent implements OnInit {
 
     this.gameService.connection.on('message', (data) => {
       this.messages.push(data);
-    })
+    });
+  }
+
+  cheat(id: number) {
+    let index = this.messages.findIndex(m => m.id == id);
+    this.messages[index].cheat = !this.messages[index].cheat;
   }
 }

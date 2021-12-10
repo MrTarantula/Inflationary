@@ -15,11 +15,13 @@ export class LoginComponent {
     name: ''
   });
 
-  constructor(private formBuilder: FormBuilder, private gameService: GameService, private router: Router) {
+  constructor(private formBuilder: FormBuilder,
+    private gameService: GameService,
+    private router: Router) {
   }
 
   onSubmit(name: string) {
     this.gameService.join(name);
-    this.router.navigate(['/game']);
+      this.router.navigate(['/game']);
   }
 }

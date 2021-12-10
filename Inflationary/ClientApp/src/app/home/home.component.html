@@ -13,8 +13,11 @@
                 <div class="form-group col-md-6 offset-md-3">
                     <input type="text" [(ngModel)]="sentence" id="message" name="message" class="form-control" placeholder="Message" value="" />
                 </div>
-                <div class="form-group col-md-3">
-                    <input type="submit" class="btn btn-primary btn-lrg" value="Add" />
+                <div class="form-group col-md-1">
+                    <input type="submit" class="btn btn-primary" value="Add" />
+                </div>
+                <div class="form-group col-md-2">
+                    <input id="check" type="button" (click)="check()" class="btn btn-secondary" value="Check" />
                 </div>
             </div>
         </form>

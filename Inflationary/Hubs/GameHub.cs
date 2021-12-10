@@ -18,7 +18,7 @@ public class GameHub : Hub
 
     public Player Join(string name)
     {
-        var player = _gameManager.AddPlayer(name);
+        var player = _gameManager.AddPlayer(name, Context.ConnectionId);
 
         Clients.All.SendAsync("players", _gameManager.Players);
         Clients.All.SendAsync("messages", _gameManager.Messages);
@@ -39,9 +39,27 @@ public class GameHub : Hub
     {
         var inflated = _translationService.Translate(input);
 
-        var newMessage = _gameManager.AddMessage(new Message(name, input, inflated.Result, inflated.Count));
+        var newMessage = _gameManager.AddMessage(name, input, inflated.Result, inflated.Count);
 
         Clients.All.SendAsync("players", _gameManager.Players);
         Clients.All.SendAsync("message", newMessage);
+    }
+
+    public string Check(string input)
+    {
+        var inflated = _translationService.Translate(input);
+        return inflated.Result;
+    }
+
+    public override Task OnDisconnectedAsync(Exception? exception)
+    {
+        var player = _gameManager.Players.First(p => p.ConnectionId == Context.ConnectionId);
+
+        _gameManager.RemovePlayer(player.Id);
+
+        Clients.All.SendAsync("players", _gameManager.Players);
+        Clients.All.SendAsync("alert", $"{player.Name} has left!");
+
+        return base.OnDisconnectedAsync(exception);
     }
 }
